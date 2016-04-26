@@ -1,0 +1,9 @@
+{% if latest_lending_list %}
+    <ul>
+    {% for lending in latest_lending_list %}
+        <li><a href="{% url 'nyilvantartas:detail' lending.id %}">{{ lending.user }} | {{lending.book}} | {{lending.lending_date}}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Nincsenek kölcsönzések.</p>
+{% endif %}

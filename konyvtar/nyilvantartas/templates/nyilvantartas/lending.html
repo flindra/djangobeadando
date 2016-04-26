@@ -1,0 +1,30 @@
+<h1>Kölcsönzés felvétele</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'nyilvantartas:lending' %}" method="post">
+{% csrf_token %}
+Felhasználó kiválasztása:
+<select name="user">
+{% for user in users %}
+    <option value="{{ user.id }}">{{ user }} - {{ user.email }}</option>
+{% endfor %}
+</select>
+<br><br>
+
+Könyv kiválasztása:
+<select name="book">
+{% for book in books %}
+    {% if book.btype != '0w' %}
+        <option value="{{ book.id }}">{{ book.title }} - {{ book.publisher }} - {{ book.year }}</option>
+    {% endif %}
+{% endfor %}
+</select>
+<br><br>
+<!--
+Dátum kiválasztása:
+<input type="text" placeholder="éééé-hh-nn óó:pp:mm" name=lending_date>
+<br><br>
+-->
+<input type="submit" name="submit" value="Felvétel" />
+</form>
